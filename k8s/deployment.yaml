@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  labels:
+    app: flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        image: flask-assignment-uwsgi:1.0.9
+        env:
+          - name: LICENSE_KEY
+            value: "foobar"
+          - name: PORT
+            value: "8096"
+        ports:
+        - containerPort: 80
+
